@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>My App</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		
+	</head>
+	<body>
+		<div class="container mt-4">
+			<form th:action="@{/main}" method="post">
+				<input type="text" placeholder="Title" name="title">
+				<input type="text" placeholder="Tag" name="tag">
+				<button type="submit">Add</button>
+			</form>
+		</div>
+		
+		<!-- filter -->
+		<div class="container mt-4">
+		<form th:action="filter">
+			<input type="text" placeholder="Filter" name="filter">
+			<button type="submit">Filter</button>
+		</form>
+		</div>
+		
+		<!-- Table -->
+		<div class="container">
+	
+			<h2>List of message</h2>
+				
+			<table>
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>Title</th>
+						<th>Tag</th>
+					</tr>
+				</thead>
+				
+					<tr th:each = "tempMessage : ${messages}">
+						<td th:text="${tempMessage.id}"></td>
+						<td th:text="${tempMessage.title}"></td>
+						<td th:text="${tempMessage.tag}"></td>
+					</tr>
+			</table>
+			
+			
+		
+		</div>
+	</body>
+</html>
