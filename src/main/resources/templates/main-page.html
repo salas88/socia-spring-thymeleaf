@@ -16,8 +16,8 @@
 		
 		<!-- filter -->
 		<div class="container mt-4">
-		<form th:action="filter">
-			<input type="text" placeholder="Filter" name="filter">
+		<form th:action="main" method="get ">
+			<input type="text" th:value="${filter}" name="filter">
 			<button type="submit">Filter</button>
 		</form>
 		</div>
