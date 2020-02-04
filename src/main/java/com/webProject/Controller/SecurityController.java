@@ -36,7 +36,7 @@ public class SecurityController {
 		user.setRoles(Collections.singleton(Role.USER));
 		userDao.save(user);
 		
-		return "redirect:/main";
+		return "redirect:/user";
 	}
 	
 }

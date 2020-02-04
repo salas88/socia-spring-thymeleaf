@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.webProject.Daojpa.MessageDao;
+import com.webProject.Daojpa.UserDao;
 import com.webProject.entity.Message;
+import com.webProject.entity.User;
 
 @Controller
 
@@ -16,6 +18,9 @@ public class MainController {
 	
 	@Autowired
 	private MessageDao messageDao;
+	
+	@Autowired
+	private UserDao userDao;
 	
 	
 	@GetMapping("/main")
@@ -45,7 +50,7 @@ public class MainController {
 		Iterable<Message> messages = messageDao.findAll();
 		
 		theModel.addAttribute("messages", messages);
-		
+	
 		return "main-page";
 	}
 	
@@ -59,7 +64,13 @@ public class MainController {
 	}
 	
 	@GetMapping()
-	public String showPage() {
+	public String showPage(User user) {
+		
+		User dbUser = userDao.findByUsername(user.getUsername());
+		
+		if(dbUser != null){
+			return "main-page";
+		} else	
 		return "home-page";
 	}
 		

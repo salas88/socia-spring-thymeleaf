@@ -6,6 +6,7 @@
 		
 	</head>
 	<body>
+				 
 		<div class="container mt-4">
 		
 		 <form th:action="@{/logout}" method="post">
@@ -23,7 +24,7 @@
 		
 		<!-- filter -->
 		<div class="container mt-4">
-		<form th:action="main" method="get ">
+		<form th:action="main" method="get">
 			<input type="text" th:value="${filter}" name="filter">
 			<button type="submit">Filter</button>
 		</form>

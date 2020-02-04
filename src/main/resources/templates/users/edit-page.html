@@ -7,10 +7,10 @@
 	
 	<body>
 			<div class="container">
-				<form th:action="@{/user/save}" method="post" >
+				<form name="form" th:action="@{/user/edit(id=${user.id})}" method="post" >
 					
 					<input type="hidden" th:field="${user.id}">
-					<input type="text" th:field="${user.username}">
+					<input type="text" name="username" th:field="${user.username}">
 					
 					<div th:each="role : ${roles}">
 				        <input type="checkbox" th:name="${role}" th:checked="${#arrays.contains(user.roles, role)}">
