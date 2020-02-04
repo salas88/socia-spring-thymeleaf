@@ -7,6 +7,13 @@
 	</head>
 	<body>
 		<div class="container mt-4">
+		
+		 <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+        
+        	<a th:href="@{/user}">List User</a>
+		
 			<form th:action="@{/main}" method="post">
 				<input type="text" placeholder="Title" name="title">
 				<input type="text" placeholder="Tag" name="tag">

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Edit User</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	</head>
+	
+	<body>
+			<div class="container">
+				<form th:action="@{/user/save}" method="post" >
+					
+					<input type="hidden" th:field="${user.id}">
+					<input type="text" th:field="${user.username}">
+					
+					<div th:each="role : ${roles}">
+				        <input type="checkbox" th:name="${role}" th:checked="${#arrays.contains(user.roles, role)}">
+				        <label th:text="${role}" /></label>
+				    </div>
+					<button type="submit">Save</button>		
+								
+				</form>
+			</div>
+	</body>
+</html>
