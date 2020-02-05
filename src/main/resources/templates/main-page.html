@@ -3,7 +3,7 @@
 	<head>
 		<title>My App</title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-		
+		<link rel="stylesheet" href="/static/style.css" >
 	</head>
 	<body>
 				 
@@ -15,9 +15,11 @@
         
         	<a th:href="@{/user}">List User</a>
 		
-			<form th:action="@{/main}" method="post">
+			<form th:action="@{/main}" method="post" enctype="multipart/form-data">
+				
 				<input type="text" placeholder="Title" name="title">
 				<input type="text" placeholder="Tag" name="tag">
+				<input type="file" name="file">
 				<button type="submit">Add</button>
 			</form>
 		</div>
@@ -31,7 +33,7 @@
 		</div>
 		
 		<!-- Table -->
-		<div class="container">
+		<div class="container col-8">
 	
 			<h2>List of message</h2>
 				
@@ -41,6 +43,7 @@
 						<th>id</th>
 						<th>Title</th>
 						<th>Tag</th>
+						<th>Image</th>
 					</tr>
 				</thead>
 				
@@ -48,6 +51,11 @@
 						<td th:text="${tempMessage.id}"></td>
 						<td th:text="${tempMessage.title}"></td>
 						<td th:text="${tempMessage.tag}"></td>
+						<td>
+						<div th:if="${tempMessage.filename}">
+						  	<img th:src="@{/img/${tempMessage.filename}}">
+						</div>
+						</td>
 					</tr>
 			</table>
 			
