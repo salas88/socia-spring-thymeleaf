@@ -63,14 +63,17 @@ public class MainController {
 		
 	}
 	
+	@PostMapping("/login")
+	public String mainPage() {
+		
+		return "redirect:/main";
+		
+	}
+	
 	@GetMapping()
-	public String showPage(User user) {
+	public String showPage() {
 		
-		User dbUser = userDao.findByUsername(user.getUsername());
 		
-		if(dbUser != null){
-			return "main-page";
-		} else	
 		return "home-page";
 	}
 		
