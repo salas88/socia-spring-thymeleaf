@@ -1,9 +1,12 @@
 package com.webProject.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,21 +23,24 @@ public class Message {
 	
 	private String filename;
 	
-	public String getFilename() {
-		return filename;
-	}
-
-	public void setFilename(String filename) {
-		this.filename = filename;
-	}
-
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User author;
+	
+	
 	public Message() {}
 
-	public Message(String title, String tag) {
+	public Message(String title, String tag, User user) {
 		this.title = title;
 		this.tag = tag;
+		this.author = user;
 	}
-
+	
+	public String getAuthorName() {
+		
+		return author != null ? author.getUsername() : "<none>";
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -59,7 +65,22 @@ public class Message {
 		this.tag = tag;
 	}
 	
-	
-	
+
+	public User getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(User author) {
+		this.author = author;
+	}
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
 
 }

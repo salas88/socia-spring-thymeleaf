@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.webProject.Daojpa.MessageDao;
 import com.webProject.Daojpa.UserDao;
 import com.webProject.entity.Message;
+import com.webProject.entity.User;
 
 @Controller
 
@@ -45,6 +47,7 @@ public class MainController {
 		theModel.addAttribute("messages", messages);
 		theModel.addAttribute("filter", filter);
 		
+		
 		return "main-page";
 	}
 	
@@ -52,10 +55,11 @@ public class MainController {
 	public String addNewMessage(@RequestParam String title,
 								@RequestParam String tag,
 								Model theModel,
-								@RequestParam("file") MultipartFile file) 
+								@RequestParam("file") MultipartFile file,
+								@AuthenticationPrincipal User user) 
 	throws IllegalStateException, IOException {
 		
-		Message message = new Message(title, tag);
+		Message message = new Message(title, tag, user);
 		
 		
 		if(file != null && !file.getOriginalFilename().isEmpty()) {
@@ -79,8 +83,17 @@ public class MainController {
 		Iterable<Message> messages = messageDao.findAll();
 		
 		theModel.addAttribute("messages", messages);
+		
 	
 		return "main-page";
+	}
+	
+	@GetMapping("/delete")
+	public String deleteMessage(@RequestParam("userId") int theId) {
+		
+		messageDao.deleteById(theId);
+		
+		return "redirect:/main";
 	}
 	
 	

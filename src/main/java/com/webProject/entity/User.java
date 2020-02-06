@@ -118,6 +118,13 @@ public class User implements UserDetails{
 		// TODO Auto-generated method stub
 		return isActive();
 	}
+
+
+
+	@Override
+	public String toString() {
+		return username;
+	}
 	
 	
 	
