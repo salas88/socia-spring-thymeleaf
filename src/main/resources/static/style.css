@@ -1,3 +1,9 @@
 body {
 	color: #103;
 }
+
+.myform {
+    width: 300px;
+    margin: 0 auto;
+    margin-top:200px;
+}

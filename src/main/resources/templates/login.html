@@ -3,20 +3,32 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <head>
         <title>Spring Security Example </title>
+         <!-- Bootstrap CSS -->
+    	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+		<link rel="stylesheet" href="/static/style.css" >
     </head>
     <body>
-        <div th:if="${param.error}">
-            Invalid username and password.
-        </div>
-        <div th:if="${param.logout}">
-            You have been logged out.
-        </div>
-        <form th:action="@{/login}" method="post">
-            <div><label> User Name : <input type="text" name="username"/> </label></div>
-            <div><label> Password: <input type="password" name="password"/> </label></div>
-            <div><input type="submit" value="Sign In"/></div>
-        </form>
-        
-        <a th:href="@{/registration}">Registration</a>
+    
+    	<div class="container">
+	    
+		    	
+				        <div th:if="${param.error}">
+				            Invalid username and password.
+				        </div>
+				        <div th:if="${param.logout}">
+				            You have been logged out.
+				        </div>
+				        <div class="myform">
+				        <form class="form-group" th:action="@{/login}" method="post">
+				            <div><label  for="exampleInputEmail1"> User Name : <input type="text" class="form-control" id="exampleInputEmail1" name="username"/> </label></div>
+				            <div><label for="exampleInputPassword1"> Password: <input type="password" name="password"  class="form-control" id="exampleInputPassword1"/> </label></div>
+				            <div><input  class="btn btn-primary" type="submit" value="Sign In"/></div>
+				        </form>
+			        
+			      			  <a th:href="@{/registration}">Registration</a>
+		       			 </div>
+		        		</div>
+	      
     </body>
 </html>
