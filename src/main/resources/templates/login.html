@@ -13,10 +13,11 @@
     	<div class="container">
 	    
 		    	
-				      
+				      <var th:text="${message}"> </var>
 				        <div class="myform">
 				        <form class="form-group " th:action="@{/login}" method="post">
 				            <div><label  for="exampleInputEmail1"> User Name : <input type="text" class="form-control" id="exampleInputEmail1" name="username"/> </label></div>
+				           
 				            <div><label for="exampleInputPassword1"> Password: <input type="password" name="password"  class="form-control" id="exampleInputPassword1"/> </label>
 				            <small id="emailHelp" class="form-text text-muted mb-2 mt-0">We'll never share your password with anyone else.</small></div>
 				            <div><input  class="btn btn-primary" type="submit" value="Sign In"/> 
