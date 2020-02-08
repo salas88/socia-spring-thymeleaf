@@ -84,6 +84,7 @@ public class MainController {
 		Iterable<Message> messages = messageDao.findAll();
 		
 		theModel.addAttribute("messages", messages);
+		theModel.addAttribute("user", user);
 			
 		return "main-page";
 	}
