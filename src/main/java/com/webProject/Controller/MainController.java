@@ -35,7 +35,7 @@ public class MainController {
 	
 	@GetMapping("/main")
 	public String show(@RequestParam(required = false, defaultValue = "") String filter,
-						Model theModel) {
+						Model theModel, @AuthenticationPrincipal User user) {
 		
 		Iterable<Message> messages = messageDao.findAll();
 		
@@ -46,6 +46,7 @@ public class MainController {
 		
 		theModel.addAttribute("messages", messages);
 		theModel.addAttribute("filter", filter);
+		theModel.addAttribute("user", user);
 		
 		
 		return "main-page";
@@ -83,8 +84,7 @@ public class MainController {
 		Iterable<Message> messages = messageDao.findAll();
 		
 		theModel.addAttribute("messages", messages);
-		
-	
+			
 		return "main-page";
 	}
 	
