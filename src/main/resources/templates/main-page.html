@@ -84,7 +84,9 @@
 			<div class="container card-columns my-4 ">
 			<div class="card" th:each = "tempMessage : ${messages}" >
 				<div class="m-2">
-			 <img src="@{/img/${tempMessage.filename}}" class="card-img-top" alt="...">
+				<div th:if="${tempMessage.filename} != null">
+			 <img src="${tempMessage.filename}" class="card-img-top" name="file" >
+			 </div>
 				 <div class="card-header"><var th:text="${tempMessage.author}"></var></div>
 				
 				

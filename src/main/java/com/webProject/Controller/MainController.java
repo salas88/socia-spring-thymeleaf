@@ -35,7 +35,8 @@ public class MainController {
 	
 	@GetMapping("/main")
 	public String show(@RequestParam(required = false, defaultValue = "") String filter,
-						Model theModel, @AuthenticationPrincipal User user) {
+					   Model theModel,
+					   @AuthenticationPrincipal User user) {
 		
 		Iterable<Message> messages = messageDao.findAll();
 		
