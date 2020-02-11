@@ -1,7 +1,12 @@
 package com.webProject.service;
 
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -40,6 +45,12 @@ public class UserService implements UserDetailsService{
 		user.setActivationCode(UUID.randomUUID().toString());
 		userDao.save(user); 
 		
+		sendMessage(user);
+		
+		return true;
+	}
+
+	private void sendMessage(User user) {
 		if(!StringUtils.isEmpty(user.getEmail())) {
 			String message = String.format(
 					"Hello %s! \n"
@@ -49,8 +60,6 @@ public class UserService implements UserDetailsService{
 			
 			theMailSender.send(user.getEmail(), "Activation Code", message);
 		}
-		
-		return true;
 	}
 
 	public boolean activateUsr(String code) {
@@ -65,4 +74,50 @@ public class UserService implements UserDetailsService{
 		return true;
 	}
 
+	public List<User> findAll() {
+		
+		return userDao.findAll();
+	}
+
+	public void saveUser(User user, String username, Map<String, String> form) {
+		user.setUsername(username);
+		
+		Set<String> roles = Arrays.stream(Role.values())
+										.map(Role::name)
+										.collect(Collectors.toSet());
+		
+		user.getRoles().clear();
+		
+		for(String key  : form.keySet()) {
+			if(roles.contains(key)) 
+				user.getRoles().add(Role.valueOf(key));
+		}
+		
+		userDao.save(user);
+		
+	}
+
+	public void updateprofile(User user, String email, String password) {
+		
+		String userEmail = user.getEmail();
+		
+		boolean isEmailChange = (email != null && !email.equals(userEmail) 
+				|| (userEmail != null && !userEmail.equals(email)));
+		
+		if(isEmailChange) {
+			user.setEmail(email);
+			
+			if(!StringUtils.isEmpty(email)) {
+				user.setActivationCode(UUID.randomUUID().toString());
+			}
+		}
+		if(!StringUtils.isEmpty(password)) {
+			user.setPassword(password);
+	}
+		userDao.save(user);
+		
+		if(isEmailChange) {
+			sendMessage(user);
+		}
+	}
 }
